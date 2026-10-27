@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-bg: #f3f0ea;
+  --color-surface: #e7e2d8;
+  --color-elevated: #fffcf8;
+  --color-ink: #1c1915;
+  --color-muted: #5c564e;
+  --color-subtle: #7a746b;
+  --color-line: #ddd6ca;
+  --color-line-strong: #c9c0b2;
+  --color-accent: #243e52;
+  --color-accent-fg: #f7f4ee;
+  --color-good: #215c40;
+  --color-bad: #8c3b36;
+  --color-warn: #8a5a2a;
+  --color-good-bg: #e5f0e8;
+  --color-bad-bg: #f6e8e6;
+  --color-warn-bg: #f6efe3;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+:root {
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.press {
+  transition-property: opacity, background-color, transform;
+  transition-duration: var(--motion-quick);
+  transition-timing-function: var(--ease-smooth);
+}
+
+.press:active {
+  transform: scale(0.98);
+}
+
+.dialog-in {
+  animation: dialog-in var(--motion-fast) var(--ease-smooth);
+}
+
+.overlay-in {
+  animation: overlay-in var(--motion-quick) var(--ease-smooth);
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press,
+  .dialog-in,
+  .overlay-in {
+    animation: none;
+    transition: none;
+  }
+
+  .press:active {
+    transform: none;
+  }
+}
